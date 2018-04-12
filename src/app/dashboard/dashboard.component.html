@@ -1,0 +1,27 @@
+<button mat-raised-button color="primary" (click)="showPhotos()" [disabled]="isDisabled">Show</button>
+<div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+  
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-checkbox 
+           (change)="selection(row, $event)"
+           [disabled]="selectedAlbums.length == 2 && !selectedAlbumsHash[row.id]">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef> Album Title</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+  </div>
